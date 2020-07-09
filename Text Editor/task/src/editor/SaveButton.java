@@ -13,10 +13,12 @@ public class SaveButton extends JButton implements ActionListener {
         super();
         this.filenameField = textField;
         this.textArea = textArea;
+
+        this.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent save){
-        File file = new File(filenameField.toString());
+        File file = new File(filenameField.getText());
         BufferedWriter fout = null;
         try {
             fout = new BufferedWriter(new FileWriter(file));

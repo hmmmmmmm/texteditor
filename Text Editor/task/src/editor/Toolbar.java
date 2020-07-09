@@ -6,11 +6,13 @@ import java.awt.*;
 public class Toolbar extends JPanel {
     private JTextArea textArea;
     JTextField filename = new JTextField();
-    SaveButton save = new SaveButton(filename, textArea);
-    LoadButton load = new LoadButton(filename, textArea);
+    SaveButton save;
+    LoadButton load;
 
     public Toolbar(JTextArea textArea){
         this.textArea = textArea;
+        this.save = new SaveButton(filename, textArea);
+        this.load = new LoadButton(filename, textArea);
         setLayout(new FlowLayout());
 
         filename.setName("FilenameField");

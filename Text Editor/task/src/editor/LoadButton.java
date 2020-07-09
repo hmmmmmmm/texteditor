@@ -13,6 +13,8 @@ public class LoadButton extends JButton implements ActionListener {
         super();
         this.filenameField = textField;
         this.textArea = textArea;
+
+        this.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent load){
