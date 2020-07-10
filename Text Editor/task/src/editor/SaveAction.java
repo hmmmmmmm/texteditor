@@ -3,10 +3,7 @@ package editor;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class SaveAction implements ActionListener {
     private final JTextField filenameField;
@@ -20,21 +17,11 @@ public class SaveAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent save) {
         File file = new File(filenameField.getText());
-        BufferedWriter fout = null;
-        try {
-            fout = new BufferedWriter(new FileWriter(file));
-
-            inputArea.write(fout);
+        String data = inputArea.getText();
+        try (OutputStream fos = new FileOutputStream(file)) {
+            fos.write(data.getBytes(), 0, data.length());
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (fout != null) {
-                    fout.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
