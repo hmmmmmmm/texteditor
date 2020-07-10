@@ -6,23 +6,23 @@ import java.awt.*;
 public class Toolbar extends JPanel {
     private JTextArea textArea;
     JTextField filename = new JTextField();
-    SaveButton save;
-    LoadButton load;
+    JButton save, load;
 
     public Toolbar(JTextArea textArea){
         this.textArea = textArea;
-        this.save = new SaveButton(filename, textArea);
-        this.load = new LoadButton(filename, textArea);
+        this.save = new JButton("Save");
+        this.load = new JButton("Load");
         setLayout(new FlowLayout());
 
         filename.setName("FilenameField");
         filename.setPreferredSize(new Dimension(550, 24));
         save.setName("SaveButton");
-        save.setText("Save");
         save.setPreferredSize(new Dimension(80, 24));
         load.setName("LoadButton");
         load.setPreferredSize(new Dimension(80, 24));
-        load.setText("Load");
+
+        this.save.addActionListener(new SaveAction(filename, textArea));
+        this.load.addActionListener(new LoadAction(filename, textArea));
 
         add(filename);
         add(Box.createHorizontalGlue());
