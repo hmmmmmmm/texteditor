@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class TextEditor extends JFrame {
     public TextEditor() {
+        setName("TextEditor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setTitle("Text Editor");
@@ -18,9 +19,14 @@ public class TextEditor extends JFrame {
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         Toolbar toolbar = new Toolbar(textArea);
+        MenuBar menuBar = new MenuBar(toolbar.filename, textArea, this);
 
         add(scroll, BorderLayout.CENTER);
-        add(toolbar, BorderLayout.NORTH);
+        JPanel topMenu = new JPanel();
+        topMenu.setLayout(new BoxLayout(topMenu, BoxLayout.Y_AXIS));
+        topMenu.add(menuBar);
+        topMenu.add(toolbar);
+        add(topMenu, BorderLayout.NORTH);
 
         pack();
         setVisible(true);
